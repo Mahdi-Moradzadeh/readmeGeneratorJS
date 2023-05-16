@@ -70,7 +70,6 @@ function init() {
     .prompt(questions)
     .then(async (answers) => {
         let html = await generateMarkdown(answers);
-        console.log(html);
         writeToFile('READMEGenerated.md', html);
     })
     .catch((error) => {
