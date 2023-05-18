@@ -1,19 +1,19 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
-    if(license === 'MIT'|| license === 'mit') {
+    if(license === 'MIT') {
         return `![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)`;
     }
-    else if(license === 'APACHE 2.0'|| license === 'apache 2.0'|| license === 'Apache 2.0'|| license === 'apache') {
+    else if(license === 'Apache') {
         return `![GitHub license](https://img.shields.io/badge/license-APACHE%202.0-blue.svg)`;
     }
-    else if(license === 'GPL 3.0'|| license === 'gpl 3.0'|| license === 'Gpl 3.0'|| license === 'gpl') {
+    else if(license === 'GPL') {
         return `![GitHub license](https://img.shields.io/badge/license-GPL%203.0-blue.svg)`;
     }
-    else if(license === 'BSD 3'|| license === 'bsd 3'|| license === 'Bsd 3'|| license === 'bsd') {
+    else if(license === 'BSD') {
         return `![GitHub license](https://img.shields.io/badge/license-BSD%203-blue.svg)`;
     }
-    else if(license === 'None'|| license === ''|| license === 'none') {
+    else if(license === 'None') {
         return `![GitHub license](https://img.shields.io/badge/license-None-blue.svg)`;
     }
     else {
@@ -24,19 +24,19 @@ function renderLicenseBadge(license) {
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
-  if(license === 'MIT'|| license === 'mit') {
+  if(license === 'MIT') {
       return `https://opensource.org/licenses/MIT`;
   }
-  else if(license === 'APACHE 2.0'|| license === 'apache 2.0'|| license === 'Apache 2.0'|| license === 'apache') {
+  else if(license === 'Apache') {
       return `https://opensource.org/licenses/Apache-2.0`;
   }
-  else if(license === 'GPL 3.0'|| license === 'gpl 3.0'|| license === 'Gpl 3.0'|| license === 'gpl') {
+  else if(license === 'GPL') {
       return `https://opensource.org/licenses/GPL-3.0`;
   }
-  else if(license === 'BSD 3'|| license === 'bsd 3'|| license === 'Bsd 3'|| license === 'bsd') {
+  else if(license === 'BSD') {
       return `https://opensource.org/licenses/BSD-3-Clause`;
   }
-  else if(license === 'None'|| license === ''|| license === 'none') {
+  else if(license === 'None') {
       return ``;
   }
   else {
@@ -47,19 +47,19 @@ function renderLicenseLink(license) {
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-  if(license === 'MIT'|| license === 'mit') {
+  if(license === 'MIT') {
       return `MIT License`;
   }
-  else if(license === 'APACHE 2.0'|| license === 'apache 2.0'|| license === 'Apache 2.0'|| license === 'apache') {
+  else if(license === 'Apache') {
       return `Apache License 2.0`;
   }
-  else if(license === 'GPL 3.0'|| license === 'gpl 3.0'|| license === 'Gpl 3.0'|| license === 'gpl') {
+  else if(license === 'GPL') {
       return `GPL License 3.0`;
   }
-  else if(license === 'BSD 3'|| license === 'bsd 3'|| license === 'Bsd 3'|| license === 'bsd') {
+  else if(license === 'BSD') {
       return `BSD License 3`;
   }
-  else if(license === 'None'|| license === ''|| license === 'none') {
+  else if(license === 'None') {
       return ``;
   }
   else {
@@ -68,34 +68,36 @@ function renderLicenseSection(license) {
 }
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  let licenseBadge = renderLicenseBadge(data.license);
-  let licenseLink = renderLicenseLink(data.license);
-  let licenseSection = renderLicenseSection(data.license);
-  //write a code to break down data.tableOfContent into a list
-  for (let i = 0; i < data.tableOfContents.length; i++) {
-    data.tableOfContents[i] = `* ${data.tableOfContents[i]}\n`;
+function generateMarkdown({title,description,tableOfContents,installation,license,usage,contributing,tests,questions}) {
+  let licenseBadge = renderLicenseBadge(license);
+  let licenseLink = renderLicenseLink(license);
+  let licenseSection = renderLicenseSection(license);
+  tableOfContents = tableOfContents.split(' ');
+  for (let i = 0; i < tableOfContents.length; i++) {
+    tableOfContents[i] = `* ${tableOfContents[i]}`;
   }
-  
-  return `# ${data.title}
+  tableOfContents = tableOfContents.join(`
+  `);
+
+  return `# ${title}
   ## Description 
-  ${data.description}
+  ${description}
   ## Table of Contents
-  ${data.tableOfContents}
+  ${tableOfContents}
   ## Installation
-  ${data.installation}
+  ${installation}
   ## Usage
-  ${data.usage}
+  ${usage}
   ## License
   ${licenseBadge}
   ${licenseLink}
   ${licenseSection}
   ## Contributing
-  ${data.contributing}
+  ${contributing}
   ## Tests
-  ${data.tests}
+  ${tests}
   ## Questions
-  ${data.questions}
+  ${questions}
 `;
 }
 
